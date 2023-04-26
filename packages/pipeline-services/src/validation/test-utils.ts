@@ -50,7 +50,7 @@ export const nodeSpec = {
               type: "integer",
               title: "CPU",
               description:
-                "For CPU-intensive workloads, you can choose more than 1 CPU (e.g. 1.5).",
+                "For CPU-intensive workloads, you can choose more than 1 CPU (e.g. 15).",
               minimum: 0,
             },
             gpu: {

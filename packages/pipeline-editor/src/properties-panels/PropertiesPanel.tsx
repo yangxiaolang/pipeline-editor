@@ -14,7 +14,10 @@
  * limitations under the License.
  */
 
+import { useCallback, useMemo } from "react";
+
 import Form, { UiSchema, Widget, AjvError } from "@rjsf/core";
+import { useIntl, FormattedMessage } from "react-intl";
 import styled from "styled-components";
 
 import {
@@ -33,6 +36,34 @@ export const Message = styled.div`
   color: ${({ theme }) => theme.palette.text.primary};
   opacity: 0.5;
 `;
+
+function processField(fieldNames: string[]) {
+  return function processFieldValues(
+    obj: Record<string, unknown>,
+    callback: (value: any) => any
+  ) {
+    const newObj: any = {};
+
+    for (const key in obj) {
+      if (obj.hasOwnProperty(key)) {
+        const value = obj[key];
+
+        if (typeof value === "object" && !Array.isArray(value)) {
+          newObj[key] = processFieldValues(
+            value as Record<string, unknown>,
+            callback
+          );
+        } else if (fieldNames.includes(key)) {
+          newObj[key] = callback(value);
+        } else {
+          newObj[key] = value;
+        }
+      }
+    }
+
+    return newObj;
+  };
+}
 
 const widgets: { [id: string]: Widget } = {
   file: FileWidget,
@@ -53,8 +84,24 @@ export function PropertiesPanel({
   onFileRequested,
   onPropertiesUpdateRequested,
 }: Props) {
+  const intl = useIntl();
+
+  const translateTitleAndDes = processField(["title", "description"]);
+
+  // const schemaTranslated = useMemo(
+  //   () =>
+  //     translateTitleAndDes(schema, (value) =>
+  //       intl.formatMessage({ id: value })
+  //     ),
+  //   [intl, schema, translateTitleAndDes]
+  // );
+
   if (schema === undefined) {
-    return <Message>No properties defined.</Message>;
+    return (
+      <Message>
+        <FormattedMessage id="form.noProperty"></FormattedMessage>
+      </Message>
+    );
   }
 
   const uiSchema: UiSchema = {};

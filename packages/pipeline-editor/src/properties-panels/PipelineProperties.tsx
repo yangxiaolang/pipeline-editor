@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 
+import { FormattedMessage } from "react-intl";
+
 import { Message } from "./PropertiesPanel";
 
 interface Props {
@@ -24,7 +26,7 @@ interface Props {
 
 function PipelineProperties(props: Props) {
   if (props.propertiesSchema === undefined) {
-    return <Message>No pipeline properties defined.</Message>;
+    return <Message><FormattedMessage id="common.noPipelineProperties"></FormattedMessage></Message>;
   }
 
   return <div />;

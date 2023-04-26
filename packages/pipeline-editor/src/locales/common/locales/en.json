@@ -1,0 +1,23 @@
+{
+  "common.newFileNode": "New Node from File",
+  "common.openFile": "Open File",
+  "common.openComponentDefinition": "Open Component Definition",
+  "common.openProperties": "Open Properties",
+  "common.error": "Error",
+  "common.nodeProperties": "Node Properties",
+  "common.editNodeProperties": "Edit node Properties",
+  "common.pipelineProperties": "Pipeline Properties",
+  "common.editPipelineProperties": "Edit pipeline properties",
+  "common.pipelineParameters": "Pipeline Parameters",
+  "common.editPipelineParameters": "Edit pipeline Parameters",
+  "common.addNodesToPipeline": "Add nodes to pipeline",
+  "common.returnToPreviousFlow": "Return to previous flow",
+  "common.selectNodeToEditItsProperties": "Select a node to edit its properties.",
+  "common.multipleNodesAreSelected": "Multiple nodes are selected. Select a single node to edit its properties.",
+  "common.nodeTypeCannotEditable": "This node type doesn't have any editable properties.",
+  "common.componentNotFound": "Component not found",
+  "common.nodeUseOutsideRegistryNode": "This node uses a component that is not stored in your component registry.",
+  "common.learnMore":"Learn more...",
+  "common.labelDescription":"A custom label for the node.",
+  "common.noPipelineProperties":"No pipeline properties defined."
+}

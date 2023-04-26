@@ -16,6 +16,7 @@
 
 import { NodeType } from "@elyra/canvas";
 import produce from "immer";
+import { FormattedMessage, useIntl } from "react-intl";
 import styled from "styled-components";
 
 import { PropertiesPanel, Message } from "./PropertiesPanel";
@@ -73,15 +74,20 @@ function NodeProperties({
   onPropertiesUpdateRequested,
   onChange,
 }: Props) {
+  const intl = useIntl();
+
   if (selectedNodes === undefined || selectedNodes.length === 0) {
-    return <Message>Select a node to edit its properties.</Message>;
+    return (
+      <Message>
+        <FormattedMessage id="common.selectNodeToEditItsProperties"></FormattedMessage>
+      </Message>
+    );
   }
 
   if (selectedNodes.length > 1) {
     return (
       <Message>
-        Multiple nodes are selected. Select a single node to edit its
-        properties.
+        <FormattedMessage id="common.multipleNodesAreSelected"></FormattedMessage>
       </Message>
     );
   }
@@ -89,12 +95,18 @@ function NodeProperties({
   const selectedNode = selectedNodes[0];
 
   if (!selectedNode) {
-    return <Message>Select a node to edit its properties.</Message>;
+    return (
+      <Message>
+        <FormattedMessage id="common.selectNodeToEditItsProperties"></FormattedMessage>
+      </Message>
+    );
   }
 
   if (selectedNode.type !== "execution_node") {
     return (
-      <Message>This node type doesn't have any editable properties.</Message>
+      <Message>
+        <FormattedMessage id="common.nodeTypeCannotEditable"></FormattedMessage>
+      </Message>
     );
   }
 
@@ -103,8 +115,9 @@ function NodeProperties({
   if (nodePropertiesSchema === undefined) {
     return (
       <Message>
-        This node uses a component that is not stored in your component
-        registry.
+        <FormattedMessage id="common.componentNotFound"></FormattedMessage>
+        <br />
+        <FormattedMessage id="common.nodeUseOutsideRegistryNode"></FormattedMessage>
         {selectedNode.app_data.component_source !== undefined
           ? ` The component's path is: ${selectedNode.app_data.component_source}`
           : ""}
@@ -114,7 +127,9 @@ function NodeProperties({
 
   if (nodePropertiesSchema?.app_data.properties === undefined) {
     return (
-      <Message>This node type doesn't have any editable properties.</Message>
+      <Message>
+        <FormattedMessage id="common.nodeTypeCannotEditable"></FormattedMessage>
+      </Message>
     );
   }
 
@@ -163,7 +178,7 @@ function NodeProperties({
         draft.properties = {
           label: {
             title: "Label",
-            description: "A custom label for the node.",
+            description: intl.formatMessage({ id: "common.labelDescription" }),
             type: "string",
           },
           ...draft.properties,
