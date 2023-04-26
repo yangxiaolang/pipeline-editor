@@ -17,12 +17,14 @@
 import { useCallback } from "react";
 
 import { ArrayFieldTemplateProps } from "@rjsf/core";
+import { FormattedMessage } from "react-intl";
 
 const renderDefaults = (
   items: any[],
   props: any
 ): React.ReactElement | undefined => {
   const allRendered = [];
+
   if (items.length === 0) {
     return undefined;
   } else if (props.schema.items?.type === "object") {
@@ -56,7 +58,7 @@ const renderDefaults = (
             className="control-label"
             style={{ color: "var(--jp-content-font-color2)" }}
           >
-            (pipeline default)
+            (<FormattedMessage id="form.pipelineDefault"></FormattedMessage>)
           </label>
           {itemRendered}
         </div>
@@ -70,7 +72,9 @@ const renderDefaults = (
         return (
           <div className="array-pipelineDefaults form-control">
             <div className="left">{item}</div>
-            <div className="right">(pipeline default)</div>
+            <div className="right">
+              (<FormattedMessage id="form.pipelineDefault"></FormattedMessage>)
+            </div>
           </div>
         );
       }
@@ -106,7 +110,7 @@ export const ArrayTemplate: React.FC<ArrayFieldTemplateProps> = (props) => {
               onClick={item.onDropIndexClick(item.index)}
               disabled={!item.hasRemove}
             >
-              {"Remove"}
+              <FormattedMessage id="form.removeAction"></FormattedMessage>
             </button>
           </div>
         );
@@ -117,7 +121,7 @@ export const ArrayTemplate: React.FC<ArrayFieldTemplateProps> = (props) => {
           className="jp-mod-styled jp-mod-reject"
           onClick={props.onAddClick}
         >
-          {"Add"}
+          <FormattedMessage id="form.addAction"></FormattedMessage>
         </button>
       )}
       {props.uiSchema.canRefresh && (
@@ -130,7 +134,7 @@ export const ArrayTemplate: React.FC<ArrayFieldTemplateProps> = (props) => {
             )
           }
         >
-          {"Refresh"}
+          <FormattedMessage id="form.refreshAction"></FormattedMessage>
         </button>
       )}
       {props.uiSchema?.files && (
@@ -139,7 +143,7 @@ export const ArrayTemplate: React.FC<ArrayFieldTemplateProps> = (props) => {
           style={{ marginLeft: "5px" }}
           onClick={handleChooseFile}
         >
-          {"Browse"}
+          <FormattedMessage id="form.browseAction"></FormattedMessage>
         </button>
       )}
     </div>

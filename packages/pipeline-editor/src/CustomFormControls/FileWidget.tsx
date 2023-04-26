@@ -17,6 +17,7 @@
 import { useCallback } from "react";
 
 import { Widget } from "@rjsf/core";
+import { FormattedMessage } from "react-intl";
 
 // TODO: Make the file clearable
 export const FileWidget: Widget = (props) => {
@@ -47,7 +48,7 @@ export const FileWidget: Widget = (props) => {
         style={{ width: "fit-content" }}
         onClick={handleChooseFile}
       >
-        Browse
+        <FormattedMessage id="form.browseAction"></FormattedMessage>
       </button>
     </div>
   );

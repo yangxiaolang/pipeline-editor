@@ -15,6 +15,7 @@
  */
 
 import { FieldTemplateProps } from "@rjsf/core";
+import { FormattedMessage } from "react-intl";
 
 export const CustomFieldTemplate: React.FC<FieldTemplateProps> = (props) => {
   let children = props.children;
@@ -34,7 +35,7 @@ export const CustomFieldTemplate: React.FC<FieldTemplateProps> = (props) => {
   ) {
     children = (
       <div style={{ paddingTop: "8px" }}>
-        No pipeline parameters are defined.
+        <FormattedMessage id="common.noPipelineProperties"></FormattedMessage>
       </div>
     );
   } else if (props.schema.uniqueItems && props.formData) {
@@ -82,7 +83,7 @@ export const CustomFieldTemplate: React.FC<FieldTemplateProps> = (props) => {
       ) : undefined}
       {children}
       {props.errors}
-      {requiredError && <li className="text-danger">is a required property</li>}
+      {requiredError && <li className="text-danger"><FormattedMessage id="form.requiredError"></FormattedMessage></li>}
     </div>
   );
 };

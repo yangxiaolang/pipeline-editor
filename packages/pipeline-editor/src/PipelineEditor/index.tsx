@@ -21,6 +21,7 @@ import React, {
   useCallback,
   useEffect,
   useImperativeHandle,
+  useMemo,
   useRef,
   useState,
 } from "react";
@@ -37,9 +38,10 @@ import {
   TipEvent,
   TipNode,
 } from "@elyra/canvas";
-import { IntlProvider } from "react-intl";
+import { FormattedMessage, IntlProvider, useIntl } from "react-intl";
 import styled, { useTheme } from "styled-components";
 
+import { SupportLang, getLocale } from "../locales";
 import NodeTooltip from "../NodeTooltip";
 import PalettePanel from "../PalettePanel";
 import PipelineController from "../PipelineController";
@@ -195,6 +197,8 @@ const PipelineEditor = forwardRef(
 
     const [supernodeOpen, setSupernodeOpen] = useState(false);
 
+    const intl = useIntl();
+
     useEffect(() => {
       const store = controller.current.objectModel.store.store;
 
@@ -267,7 +271,7 @@ const PipelineEditor = forwardRef(
           return [
             {
               action: "createSuperNode",
-              label: "Create Supernode",
+              label: intl.formatMessage({ id: "node.createSupernode" }),
               // NOTE: There is a bug if you try to create a supernode with only
               // a comment selected. This will disable creating supernodes when
               // the comment is right clicked on even if other nodes are
@@ -280,23 +284,23 @@ const PipelineEditor = forwardRef(
             },
             {
               action: "cut",
-              label: "Cut",
+              label: intl.formatMessage({ id: "edit.cutSelection" }),
             },
             {
               action: "copy",
-              label: "Copy",
+              label: intl.formatMessage({ id: "edit.copySelection" }),
             },
             {
               divider: true,
             },
             {
               action: "disconnectNode",
-              label: "Disconnect",
+              label: intl.formatMessage({ id: "node.disconnectNode" }),
               enable: canDisconnect,
             },
             {
               action: "deleteSelectedObjects",
-              label: "Delete",
+              label: intl.formatMessage({ id: "canvas.deleteObject" }),
             },
           ];
         }
@@ -306,18 +310,18 @@ const PipelineEditor = forwardRef(
             return [
               {
                 action: "newFileNode",
-                label: "New Node from File",
+                label: intl.formatMessage({ id: "common.newFileNode" }),
               },
               {
                 action: "createComment",
-                label: "New Comment",
+                label: intl.formatMessage({ id: "canvas.addComment" }),
               },
               {
                 divider: true,
               },
               {
                 action: "paste",
-                label: "Paste",
+                label: intl.formatMessage({ id: "edit.pasteSelection" }),
                 enable: canPaste,
               },
             ];
@@ -332,9 +336,11 @@ const PipelineEditor = forwardRef(
               return [
                 {
                   action: "openFile",
-                  label: filenameRef
-                    ? "Open File"
-                    : "Open Component Definition",
+                  label: intl.formatMessage({
+                    id: filenameRef
+                      ? "common.openFile"
+                      : "common.openComponentDefinition",
+                  }),
                   // NOTE: This only checks if the string is empty, but we
                   // should verify the file exists.
                   enable:
@@ -344,37 +350,37 @@ const PipelineEditor = forwardRef(
                 },
                 {
                   action: "properties",
-                  label: "Open Properties",
+                  label: intl.formatMessage({ id: "common.openProperties" }),
                 },
                 {
                   divider: true,
                 },
                 {
                   action: "createSuperNode",
-                  label: "Create Supernode",
+                  label: intl.formatMessage({ id: "node.createSupernode" }),
                 },
                 {
                   divider: true,
                 },
                 {
                   action: "cut",
-                  label: "Cut",
+                  label: intl.formatMessage({ id: "edit.cutSelection" }),
                 },
                 {
                   action: "copy",
-                  label: "Copy",
+                  label: intl.formatMessage({ id: "edit.copySelection" }),
                 },
                 {
                   divider: true,
                 },
                 {
                   action: "disconnectNode",
-                  label: "Disconnect",
+                  label: intl.formatMessage({ id: "node.disconnectNode" }),
                   enable: canDisconnect,
                 },
                 {
                   action: "deleteSelectedObjects",
-                  label: "Delete",
+                  label: intl.formatMessage({ id: "canvas.deleteObject" }),
                 },
               ];
             }
@@ -384,37 +390,41 @@ const PipelineEditor = forwardRef(
                   action: canExpand
                     ? "expandSuperNodeInPlace"
                     : "collapseSuperNodeInPlace",
-                  label: canExpand ? "Expand Supernode" : "Collapse Supernode",
+                  label: intl.formatMessage({
+                    id: canExpand
+                      ? "node.expandSupernode"
+                      : "node.collapseSupernodeInPlace",
+                  }),
                 },
                 {
                   divider: true,
                 },
                 {
                   action: "createSuperNode",
-                  label: "Create Supernode",
+                  label: intl.formatMessage({ id: "node.createSupernode" }),
                 },
                 {
                   divider: true,
                 },
                 {
                   action: "cut",
-                  label: "Cut",
+                  label: intl.formatMessage({ id: "edit.cutSelection" }),
                 },
                 {
                   action: "copy",
-                  label: "Copy",
+                  label: intl.formatMessage({ id: "edit.copySelection" }),
                 },
                 {
                   divider: true,
                 },
                 {
                   action: "disconnectNode",
-                  label: "Disconnect",
+                  label: intl.formatMessage({ id: "node.disconnectNode" }),
                   enable: canDisconnect,
                 },
                 {
                   action: "deleteSelectedObjects",
-                  label: "Delete",
+                  label: intl.formatMessage({ id: "canvas.deleteObject" }),
                 },
               ];
             }
@@ -423,14 +433,14 @@ const PipelineEditor = forwardRef(
             return [
               {
                 action: "deleteLink",
-                label: "Delete",
+                label: intl.formatMessage({ id: "link.deleteLink" }),
               },
             ];
           case "comment":
             return [
               {
                 action: "createSuperNode",
-                label: "Create Supernode",
+                label: intl.formatMessage({ id: "node.createSupernode" }),
                 // NOTE: There is a bug if you try to create a supernode with only
                 // a comment selected.
                 enable: false,
@@ -440,23 +450,23 @@ const PipelineEditor = forwardRef(
               },
               {
                 action: "cut",
-                label: "Cut",
+                label: intl.formatMessage({ id: "edit.cutSelection" }),
               },
               {
                 action: "copy",
-                label: "Copy",
+                label: intl.formatMessage({ id: "edit.copySelection" }),
               },
               {
                 divider: true,
               },
               {
                 action: "disconnectNode",
-                label: "Disconnect",
+                label: intl.formatMessage({ id: "node.disconnectNode" }),
                 enable: canDisconnect,
               },
               {
                 action: "deleteSelectedObjects",
-                label: "Delete",
+                label: intl.formatMessage({ id: "canvas.deleteObject" }),
               },
             ];
         }
@@ -464,7 +474,7 @@ const PipelineEditor = forwardRef(
         // anything else
         return defaultMenu;
       },
-      []
+      [intl]
     );
 
     const handleClickAction = useCallback(
@@ -669,7 +679,7 @@ const PipelineEditor = forwardRef(
     if (readOnly) {
       return (
         <Container className="pipeline-read-only" ref={blockingRef}>
-          <IntlProvider locale="en">
+          <IntlProvider locale={intl.locale} messages={intl.messages}>
             <CommonCanvas
               canvasController={controller.current}
               contextMenuHandler={() => {}}
@@ -704,8 +714,8 @@ const PipelineEditor = forwardRef(
     const panelTabs = [
       {
         id: "pipeline-properties",
-        label: "Pipeline Properties",
-        title: "Edit pipeline properties",
+        label: intl.formatMessage({ id: "common.pipelineProperties" }),
+        title: intl.formatMessage({ id: "common.editPipelineProperties" }),
         icon: theme.overrides?.pipelineIcon,
         content: (
           <PropertiesPanel
@@ -719,8 +729,8 @@ const PipelineEditor = forwardRef(
       },
       {
         id: "properties",
-        label: "Node Properties",
-        title: "Edit node properties",
+        label: intl.formatMessage({ id: "common.nodeProperties" }),
+        title: intl.formatMessage({ id: "common.editNodeProperties" }),
         icon: theme.overrides?.propertiesIcon,
         content: (
           <NodeProperties
@@ -742,8 +752,8 @@ const PipelineEditor = forwardRef(
     if (pipelineParameters) {
       panelTabs.splice(1, 0, {
         id: "pipeline-parameters",
-        label: "Pipeline Parameters",
-        title: "Edit pipeline parameters",
+        label: intl.formatMessage({ id: "common.pipelineParameters" }),
+        title: intl.formatMessage({ id: "common.editPipelineParameters" }),
         icon: theme.overrides?.pipelineIcon,
         content: (
           <PropertiesPanel
@@ -764,8 +774,8 @@ const PipelineEditor = forwardRef(
     if (!leftPalette) {
       panelTabs.push({
         id: "palette",
-        label: "Palette",
-        title: "Add nodes to pipeline",
+        label: intl.formatMessage({ id: "toolbar.palette" }),
+        title: intl.formatMessage({ id: "common.addNodesToPipeline" }),
         icon: theme.overrides?.paletteIcon,
         content: (
           <PalettePanel nodes={controller.current.getAllPaletteNodes()} />
@@ -775,7 +785,7 @@ const PipelineEditor = forwardRef(
 
     return (
       <Container ref={blockingRef}>
-        <IntlProvider locale="en">
+        <IntlProvider locale={intl.locale} messages={intl.messages}>
           {supernodeOpen === true && (
             <Button
               hasToolbar={toolbar !== undefined}
@@ -785,7 +795,7 @@ const PipelineEditor = forwardRef(
                 });
               }}
             >
-              Return to previous flow
+              <FormattedMessage id='common.returnToPreviousFlow'></FormattedMessage>
             </Button>
           )}
           <SplitPanelLayout
@@ -875,9 +885,20 @@ const PipelineEditor = forwardRef(
 );
 
 const ThemedPipelineEditor = forwardRef((props: Props, ref) => {
+  const [locale, setLocale] = useState<SupportLang>("en");
+
+  const messages = useMemo(() => getLocale(locale), [locale]);
+
+  useEffect(() => {
+    const html = document.querySelector("html");
+    setLocale((html?.lang?.replace("_", "-") as SupportLang) || "en");
+  }, [setLocale]);
+
   return (
     <InternalThemeProvider>
-      <PipelineEditor {...props} ref={ref} />
+      <IntlProvider locale={locale} messages={messages}>
+        <PipelineEditor {...props} ref={ref} />
+      </IntlProvider>
     </InternalThemeProvider>
   );
 });

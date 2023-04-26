@@ -10,7 +10,7 @@
     "jsxFragmentFactory": "",
     "declaration": true,
     "downlevelIteration": true,
-    "sourceMap": true
+    "sourceMap": true,
   },
   "include": ["src"]
 }

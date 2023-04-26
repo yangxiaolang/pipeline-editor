@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+import { useIntl } from "react-intl";
 import styled from "styled-components";
 
 import { hasValue, toPrettyString } from "./utils";
@@ -48,11 +49,13 @@ const ErrorValue = styled(Value)`
 `;
 
 function NodeTooltip({ error, nodeLabel, properties }: Props) {
+  const intl = useIntl();
+
   return (
     <Container>
       {error && (
         <div>
-          <Key>Error</Key>
+          <Key>{intl.formatMessage({ id: "common.error" })}</Key>
           <ErrorValue>{toPrettyString(error)}</ErrorValue>
         </div>
       )}

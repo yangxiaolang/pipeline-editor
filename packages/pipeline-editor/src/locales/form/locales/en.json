@@ -1,0 +1,9 @@
+{
+  "form.pipelineDefault": "pipeline default",
+  "form.removeAction": "Remove",
+  "form.addAction": "Add",
+  "form.refreshAction": "Refresh",
+  "form.browseAction": "Browse",
+  "form.requiredError":"is a required property",
+  "form.noProperty":"No properties defined."
+}
