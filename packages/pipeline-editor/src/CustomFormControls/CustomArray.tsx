@@ -97,6 +97,9 @@ export const ArrayTemplate: React.FC<ArrayFieldTemplateProps> = (props) => {
           <div key={item.key} className={item.className}>
             {item.children}
             <button
+              style={{
+                minWidth: "60px",
+              }}
               className="jp-mod-styled jp-mod-warn"
               onClick={item.onDropIndexClick(item.index)}
               disabled={!item.hasRemove}

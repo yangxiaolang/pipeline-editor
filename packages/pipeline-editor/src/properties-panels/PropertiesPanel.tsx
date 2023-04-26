@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import { useCallback, useMemo } from "react";
+import { useMemo } from "react";
 
 import Form, { UiSchema, Widget, AjvError } from "@rjsf/core";
 import { useIntl, FormattedMessage } from "react-intl";
@@ -88,13 +88,13 @@ export function PropertiesPanel({
 
   const translateTitleAndDes = processField(["title", "description"]);
 
-  // const schemaTranslated = useMemo(
-  //   () =>
-  //     translateTitleAndDes(schema, (value) =>
-  //       intl.formatMessage({ id: value })
-  //     ),
-  //   [intl, schema, translateTitleAndDes]
-  // );
+  const schemaTranslated = useMemo(
+    () =>
+      translateTitleAndDes(schema, (value) =>
+        intl.formatMessage({ id: value })
+      ),
+    [intl, schema, translateTitleAndDes]
+  );
 
   if (schema === undefined) {
     return (
@@ -104,10 +104,10 @@ export function PropertiesPanel({
     );
   }
 
-  const uiSchema: UiSchema = {};
-  for (const field in schema.properties) {
+  let uiSchema: UiSchema = {};
+  for (const field in schemaTranslated.properties) {
     uiSchema[field] = {};
-    const properties = schema.properties[field];
+    const properties = schemaTranslated.properties[field];
     if (properties.type === "object") {
       for (const subField in properties.properties) {
         const subProps = properties.properties[subField];
@@ -121,14 +121,20 @@ export function PropertiesPanel({
     }
   }
 
+  uiSchema = {
+    ...uiSchema,
+    ...schemaTranslated.uihints,
+  };
+
   return (
     <Form
       formData={data}
       uiSchema={uiSchema}
-      schema={schema as any}
+      schema={schemaTranslated as any}
       onChange={(e) => {
         const newFormData = e.formData;
-        const params = schema.properties?.component_parameters?.properties;
+        const params =
+          schemaTranslated.properties?.component_parameters?.properties;
         for (const field in params) {
           if (params[field].oneOf) {
             for (const option of params[field].oneOf) {

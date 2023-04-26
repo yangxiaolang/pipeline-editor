@@ -59,12 +59,12 @@ function NodeTooltip({ error, nodeLabel, properties }: Props) {
           <ErrorValue>{toPrettyString(error)}</ErrorValue>
         </div>
       )}
-      <Key>{nodeLabel}</Key>
+      <Key>{intl.formatMessage({ id: nodeLabel })}</Key>
       {properties
         .filter(({ value }) => hasValue(value))
         .map(({ label, value }) => (
           <div key={label}>
-            <Key>{label}</Key>
+            <Key>{intl.formatMessage({ id: label })}</Key>
             <Value>{toPrettyString(value)}</Value>
           </div>
         ))}
