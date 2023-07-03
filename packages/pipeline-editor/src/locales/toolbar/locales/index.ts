@@ -14,35 +14,34 @@
  * limitations under the License.
  */
 
-import de  from "./de.json";
-import en  from "./en.json";
-import eo  from "./eo.json";
-import es  from "./es.json";
-import fr  from "./fr.json";
-import itIT  from "./it.json";
-import ja  from "./ja.json";
-import ko  from "./ko.json";
-import ptBR  from "./pt-br.json";
-import ru  from "./ru.json";
-import sv  from "./sv.json";
-import zhCN  from "./zh-CN.json";
-import zhTW  from "./zh-TW.json";
-
+import de from "./de.json";
+import en from "./en.json";
+import eo from "./eo.json";
+import es from "./es.json";
+import fr from "./fr.json";
+import itIT from "./it.json";
+import ja from "./ja.json";
+import ko from "./ko.json";
+import ptBR from "./pt-br.json";
+import ru from "./ru.json";
+import sv from "./sv.json";
+import zhCN from "./zh-CN.json";
+import zhTW from "./zh-TW.json";
 
 const toolbar = {
-	"de": de,
-	"en": en,
-	"es": es,
-	"fr": fr,
-	"it": itIT,
-	"ja": ja,
-	"pt-BR": ptBR,
-	"zh-TW": zhTW,
-	"zh-CN": zhCN,
-	"ru": ru,
-	"eo": eo,
-	"ko": ko,
-	"sv": sv
+  de: de,
+  en: en,
+  es: es,
+  fr: fr,
+  it: itIT,
+  ja: ja,
+  "pt-BR": ptBR,
+  "zh-TW": zhTW,
+  "zh-CN": zhCN,
+  ru: ru,
+  eo: eo,
+  ko: ko,
+  sv: sv,
 };
 
-export default toolbar
+export default toolbar;

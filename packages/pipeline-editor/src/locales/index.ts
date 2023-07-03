@@ -17,8 +17,8 @@
 import actions from "./command-actions/locales";
 import canvas from "./common-canvas/locales";
 import properties from "./common-properties/locales";
-import common from './common/locales'
-import form from './form/locales'
+import common from "./common/locales";
+import form from "./form/locales";
 import palette from "./palette/locales";
 import toolbar from "./toolbar/locales";
 
@@ -37,7 +37,7 @@ export const Message = {
     ...palette.en,
     ...toolbar.en,
     ...common.en,
-    ...form.en
+    ...form.en,
   },
   es: {
     ...actions.es,
@@ -87,8 +87,8 @@ export const Message = {
     ...properties["zh-CN"],
     ...palette["zh-CN"],
     ...toolbar["zh-CN"],
-    ...common['zh-CN'],
-    ...form['zh-CN'],
+    ...common["zh-CN"],
+    ...form["zh-CN"],
   },
   ru: {
     ...actions.ru,

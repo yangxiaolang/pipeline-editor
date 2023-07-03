@@ -795,7 +795,7 @@ const PipelineEditor = forwardRef(
                 });
               }}
             >
-              <FormattedMessage id='common.returnToPreviousFlow'></FormattedMessage>
+              <FormattedMessage id="common.returnToPreviousFlow"></FormattedMessage>
             </Button>
           )}
           <SplitPanelLayout

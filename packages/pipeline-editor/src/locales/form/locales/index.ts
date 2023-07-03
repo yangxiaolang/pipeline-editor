@@ -14,12 +14,12 @@
  * limitations under the License.
  */
 
-import en from './en.json'
-import zhCN from './zh-CN.json'
+import en from "./en.json";
+import zhCN from "./zh-CN.json";
 
 const common = {
-	"en": en,
-	"zh-CN": zhCN,
+  en: en,
+  "zh-CN": zhCN,
 };
 
-export default common
+export default common;

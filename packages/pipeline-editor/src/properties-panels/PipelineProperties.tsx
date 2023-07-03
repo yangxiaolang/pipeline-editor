@@ -26,7 +26,11 @@ interface Props {
 
 function PipelineProperties(props: Props) {
   if (props.propertiesSchema === undefined) {
-    return <Message><FormattedMessage id="common.noPipelineProperties"></FormattedMessage></Message>;
+    return (
+      <Message>
+        <FormattedMessage id="common.noPipelineProperties"></FormattedMessage>
+      </Message>
+    );
   }
 
   return <div />;
