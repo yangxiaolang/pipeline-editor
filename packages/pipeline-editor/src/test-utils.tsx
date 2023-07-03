@@ -16,7 +16,9 @@
 
 import { PaletteV3 } from "@elyra/canvas";
 import { render as rtlRender } from "@testing-library/react";
+import { IntlProvider } from "react-intl";
 
+import { Message } from "./locales";
 import { PIPELINE_CURRENT_VERSION } from "./PipelineController";
 import { InternalThemeProvider } from "./ThemeProvider";
 
@@ -448,7 +450,13 @@ function render(
   renderOptions?: Parameters<typeof rtlRender>[1]
 ) {
   const Wrapper: React.FC = ({ children }) => {
-    return <InternalThemeProvider>{children}</InternalThemeProvider>;
+    return (
+      <InternalThemeProvider>
+        <IntlProvider locale="en" messages={Message.en}>
+          {children}
+        </IntlProvider>
+      </InternalThemeProvider>
+    );
   };
 
   return {
